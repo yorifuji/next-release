@@ -1,6 +1,6 @@
 # next-latest-release
 
-`next-latest-release`` is a GitHub Action designed to automate the process of version bumping in software releases. It supports major, minor, and patch version increments, making it easy to retrieve the next version based on the latest GitHub Release.
+`next-latest-release` is a GitHub Action designed to automate the process of version bumping in software releases. It supports major, minor, and patch version increments, making it easy to retrieve the next version based on the latest GitHub Release.
 
 ## Usage
 
