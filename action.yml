@@ -1,0 +1,50 @@
+name: "Next Latest Release"
+
+description: "Automates GitHub release versioning with major, minor, and patch options"
+
+author: "yorifuji"
+
+branding:
+  icon: "code"
+  color: "blue"
+
+inputs:
+  bump:
+    type: choice
+    description: Choose the type of bump
+    default: patch
+    options:
+      - major
+      - minor
+      - patch
+  verbose:
+    description: "Enable verbose logging"
+    required: false
+    default: false
+
+outputs:
+  version:
+    description: "The next semantic version number"
+    value: ${{ steps.next-latest-release.outputs.version }}
+  major:
+    description: "The major version number"
+    value: ${{ steps.next-latest-release.outputs.major }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/github-script@v7
+      id: next-latest-release
+      env:
+        BUMP: ${{ inputs.bump }}
+        VERBOSE: ${{ inputs.verbose }}
+      with:
+        retries: 3
+        script: |
+          const bump = process.env.BUMP;
+          const verbose = process.env.VERBOSE === 'true';
+          const actionPath = process.env.GITHUB_ACTION_PATH;
+
+          const path = require('path');
+          const script = require(path.join(actionPath, 'index.js'));
+          await script({ core, github, context, bump, verbose })
