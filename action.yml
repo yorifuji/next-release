@@ -10,13 +10,9 @@ branding:
 
 inputs:
   bump:
-    type: choice
     description: Choose the type of bump
+    required: true
     default: patch
-    options:
-      - major
-      - minor
-      - patch
   verbose:
     description: "Enable verbose logging"
     required: false
