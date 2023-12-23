@@ -29,8 +29,9 @@ jobs:
 
       - uses: ./
         id: next-latest-release
-        env:
+        with:
           bump: ${{ inputs.bump }}
+          verbose: true
 
       - name: Create release
         env:
